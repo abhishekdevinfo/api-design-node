@@ -3,16 +3,15 @@
 // it should then send back jsonData on a GET to /data
 
 var express = require('express');
-var fs = require('fs');
-
 var app = express();
 
 var jsonData = {count: 12, message: 'hey'};
 
 app.get('/', function(req, res) {
-    fs.readFile('../api-design-node/index.html', 'utf8', (err, data) => {
-        if (err) throw err;
-        res.send(data);
+    res.sendFile(__dirname + '/index.html', function(err) {
+        if (err) {
+            res.status(500).send(err);
+        }
     });
 });
 
